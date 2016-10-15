@@ -1,0 +1,1261 @@
+{% extends "_lay_mu_out/_layout.html" %}
+{% load get_comment %}
+
+{% block newcss %}
+    <link rel="mask-icon" sizes="any" href="#">
+    <link rel="shortcut icon" type="image/x-icon" href="#">
+    <link href="/statics/profile_js_css/WB_outframe.css" type="text/css" rel="stylesheet">
+    <link href="/statics/index_profile_js_css/home_A.css" type="text/css" rel="stylesheet" id="skin_style">
+    <link href="/statics/index_profile_js_css/frame.css" type="text/css" rel="stylesheet" charset="utf-8">
+    <link href="/statics/index_profile_js_css/comb_login_v2.css" type="text/css" rel="stylesheet" charset="utf-8">
+    <link href="/statics/index_profile_js_css/skin.css" type="text/css" rel="stylesheet" id="skin_style">
+    <link href="/statics/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" >
+    <link href="/statics/search/face/jquery.sinaEmotion.css" type="text/css" rel="stylesheet" >
+    <style>
+        .hide {
+            display: none;
+        }
+    *{margin:0;padding:0;}
+	.fileImg{padding:20px;background:#ececec;overflow:hidden;width:800px;margin:20px auto;}
+	.fileImg ul li{position:relative;border:1px solid #c5c5c5;width:50px;height:50px;float:left;margin-right:50px;list-style-type:none;background:#f4f5f7;border-radius:5px;}
+	.fileImg ul li input{position:absolute;z-index:3;top:0;left:0;width:100%;height:100%;opacity:0;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+	.fileImg ul li:after{position:absolute;content:' ';display:block;width:2px;height:30px;background:#cdcdcd;left:50%;margin-left:-1px;top:50%;margin-top:-15px;z-index:2;}
+	.fileImg ul li:before{position:absolute;content:' ';display:block;top:50%;margin-top:-1px;z-index:2;width:30px;height:2px;background:#cdcdcd;left:50%;margin-left:-15px;}
+	.fileImg ul li span:nth-child(2){display:none;width:50px;height:50px;position:absolute;left:0;top:0;background:#f4f5f7;cursor:pointer;border-radius:5px;overflow:hidden;z-index:3;}
+	.fileImg ul li span:nth-child(2):after{content:'x';display:block;z-index:4;width:20px;height:20px;line-height:16px;color:#fff;background:red;border-radius:50%;position:absolute;left:50%;top:50%;margin-left:-10px;margin-top:-10px;text-align:center;}
+	.fileImg ul li span:nth-child(2) img{width:100%;position:absolute;left:0;top:50%;}
+    div{border: 0px}
+    .picture{border: 0px;width: 500px;height: auto;background-color: gainsboro}
+    .WB_feed_repeat{border-bottom-left-radius: 2px;border-bottom-right-radius: 2px;}
+    .WB_feed_repeat .WB_repeat{margin: -1px 0 0;padding: 16px 0 6px;border-top-width: 1px;border-top-style: solid;}
+    .WB_feed_repeat .WB_feed_publish{padding-left: 30px;  padding-right: 20px;}
+    .WB_feed_repeat .WB_feed_publish {  padding: 0 16px 0 20px;  }
+    .WB_face {  position: relative;  }
+    .WB_feed_repeat .WB_face, .WB_feed_repeat .WB_face img {  width: 30px;  height: 30px;  }
+    .W_fl {  float: left;  }
+    .WB_feed_repeat .WB_publish {  margin-left: 50px;  }
+    .WB_feed_repeat .WB_publish {  margin: 0 0 0 50px;  }
+    .WB_publish .p_input {  margin: 0 0 10px;  }
+    .WB_publish .p_input .W_input {  width: 98%;  }
+    .clearfix{display: block}
+    .WB_publish .p_opt .btn {  padding: 0 0 10px;  text-align: left;  }
+    .W_fr {  float: right; cursor: pointer }
+    .WB_publish .p_opt .btn .W_btn_a {  vertical-align: top;  }
+    .W_btn_a_disable, .W_btn_a_disable:hover {  background: #ffc09f;  color: #fff;  border: 1px solid #fbbd9e;  box-shadow: none;  cursor: default;  }
+    .WB_publish .p_opt .opt .ico {  float: left;  margin: -4px 5px 0 0;  }
+    .WB_publish .p_opt .opt ul.ipt {  float: left;  margin: 1px 0 0;padding: 0 0 4px }
+    .WB_publish .p_opt .opt ul.ipt li {  margin: 0 0 5px;  }
+    input, textarea, select {  font-family: inherit;  font-size: inherit;  font-weight: inherit;  }
+    .W_label span, .W_label span {  vertical-align: middle;  }
+    .WB_feed_repeat .repeat_list {  padding: 0 20px 0 80px;  overflow: hidden;  }
+    .WB_feed_repeat .repeat_list .tab_feed_a {  margin: 6px 0 4px;  padding: 12px 0 0;  border-top-width: 1px;  border-top-style: solid;  }
+    .tab_feed_a {  overflow: hidden;  line-height: 20px;  }
+    .S_line1, .W_btn_prev, .W_btn_next, .W_btn_b {  border-color: #d9d9d9;  }
+    .tab_feed_a {  overflow: hidden;  line-height: 20px;  }
+    .tab_feed_a .tab {  margin: 0 0 0 -10px;  }
+    .tab_feed_a .tab ul {  overflow: hidden;  }
+    .tab_feed_a .tab li {  float: left;  margin: 0 0 0 -1px;  }
+    .tab_feed_a .tab .line {  display: block;  margin: 5px 0;  padding: 0 10px;  border-left-width: 1px;  border-left-style: solid;  line-height: 10px;  }
+    .tab_feed_a li .curr {  font-weight: bold;  }
+    .WB_feed_repeat .repeat_list .list_box {  margin: -4px 0 0;  }
+    .WB_feed_repeat .repeat_list .list_li {  margin: 0 0 -1px;  padding: 5px 0 7px;  border-bottom-width: 1px;  border-bottom-style: solid;  }
+    .WB_feed_repeat .repeat_list .WB_face {  margin-left: 0;  }
+    .WB_feed_repeat .repeat_list .WB_face {  padding: 6px 0 0;  }
+    .WB_feed_repeat .WB_face, .WB_feed_repeat .WB_face img {  width: 30px;  height: 30px;  }
+    .WB_feed_v3 .WB_face {  position: relative;  }
+    .WB_feed_repeat .list_con {  margin: 0 0 0 40px;  }
+    .WB_feed_repeat .repeat_list .WB_text {  margin-bottom: 0;  }
+    .WB_feed_repeat .repeat_list .WB_text {  padding: 0 0 2px;  }
+    .icon_airball {  width: 12px;  background-position: -75px -125px;  }
+    .WB_func .WB_handle ul {  margin-right: -9px;  overflow: visible;  }
+    .WB_func .WB_handle li .hover {  visibility: hidden;  }
+    .WB_func .WB_handle li .line {  display: block;  margin: 2px 0;  padding: 0 10px;  border-right-width: 1px;  border-right-style: solid;  line-height: 12px;  }
+    .WB_func .WB_handle li {  float: left;  margin: 0 -1px 0 0;  }
+    .WB_func .WB_handle .arrow {  visibility: hidden;  position: absolute;  margin: 15px 0 0 -5px;  }
+    .WB_func .WB_handle .W_arrow_bor {  position: absolute;  margin: -20px 0 0 20px;  }
+    .WB_func .WB_handle li .line span em.W_ficon {  margin-left: 0;  margin-right: -10px;  font-size: 15px;  vertical-align: top;  }
+    .WB_func .WB_handle li .line span em {  margin-left: 15px;  }
+    .ul_ul li{float: right;padding-left: 10px}
+    </style>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block inner %}
+    {#<body class="FRAME_login WB_macT">#}
+    <div class="B_unlog">
+
+        <div class="WB_miniblog">
+            <div class="WB_miniblog_fb">
+                <div class="WB_main clearfix" id="plc_frame">
+                    <div class="WB_frame">
+                        <!-- 左导 -->
+                        <div class="WB_main_l">
+                            <div id="pl_unlogin_home_leftnav">
+                                <div class="WB_left_nav">
+                                    <div class="unlogin_left_nav">
+                                        <div class="lev_Box">
+                                            <div class="lev ">
+                                                <a><span style="color: white" class="levtxt glyphicon glyphicon-home"><b> 推荐</b> </span><em class="W_new_count">HOT</em></a>
+                                            </div>
+                                            <div class="lev "><a class="S_txt1 ">
+                                                <span class="levtxt glyphicon glyphicon-star-empty"><b> 明星</b></span></a>
+                                            </div>
+                                            <div class="lev "><a class="S_txt1 ">
+                                                <span class="levtxt glyphicon glyphicon-facetime-video"><b> 视频</b></span></a>
+                                            </div>
+                                            <div class="lev "><a class="S_txt1 ">
+                                                <span class="levtxt"><em style="font-size: 26px;margin-left: -5px;">☺</em><b style="margin-left: 5px"> 搞笑</b></span></a>
+                                            </div>
+                                            <div class="lev "><a class="S_txt1 ">
+                                                <span class="levtxt glyphicon glyphicon-heart"><b> 情感</b></span></a>
+                                            </div>
+
+                                            <div class="lev lev_more lev_more_v2"><a class="S_txt1 ">
+                                                <span class="levtxt glyphicon glyphicon-th"><b> 更多</b></span></a>
+                                                <div class="lev_layer" style="display:none">
+                                                    <div class="W_arrow_bor W_arrow_bor_l"><i class="S_line3"></i><em
+                                                            class="S_bg2_br"></em></div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ／左导 -->
+                        <div id="plc_main">
+                            <div id="plc_unlogin_home_main">
+                                <div class="WB_frame_c">
+                                    <div id="pl_unlogin_home_feed">
+                                        <div class="WB_cardwrap unlogin_notes" action-type="unread_feed_tip"
+                                             style="display:none"><span class="wrap"><i
+                                                class="W_loading"></i>推荐中...</span></div>
+
+                                        <div class="PCD_pictext_i PCD_pictext_i_v5 " id="PCD_pictext_i_v5">
+                                            <div class="WB_innerwrap">
+                                                <div class="m_wrap">
+{#登录之后显示上面的搜索框#}
+
+{% if is_login %}
+<div id="v6_pl_content_publishertop" class=""><div class="send_weibo S_bg2 clearfix" node-type="wrap">
+    <div class="title_area clearfix">
+            <div style="margin-top: -5px" class="title11"><img src="/statics/image/tu.png" alt=""></div>
+            <div class="num S_txt2 hide title2" node-type="num">还可以输入<span>140</span>字</div>
+            <div class="key" node-type="recommendTopic">
+                <a href="http://hot.weibo.com?refer=homright" target="_blank">热门微博点这里</a>
+                <a href="javascript:;" style="position:absolute;top:-1000px;" title="微博内容列表"></a>
+                <a href="javascript:;" id="focus_feed_list" style="position:absolute;top:-1000px;"></a>
+            </div>
+    </div>
+    <div class="input" node-type="textElDiv" >
+        <textarea oninput="font_siz()" id="textarea" class="W_input emotion " title="微博输入框" name="" node-type="textEl" range="0&amp;0" content=""></textarea>
+        <div class="send_succpic" style="display:none" node-type="successTip"><span class="W_icon icon_succB"></span><span class="txt">发布成功</span></div>
+        <form style="display:none;" node-type="extradata">
+    		<input name="pollid" value="">
+            <input name="pub_source" value="main_">
+		</form>
+        <div class="set_timer S_line1 S_bg1 clearfix" node-type="settime" style="display: none;">
+                        <span class="set_date_txt W_fl">发布时间：</span>
+            <div class="set_data_mod W_fl S_line3 clearfix" action-type="settime_data" action-data="start=2016-09-23&amp;end=2016-09-25">
+                <input type="text" value="2016-09-23" class="ipt W_fl" readonly="true" node-type="settime_data">
+                <i class="icon_calendar W_fr"></i>
+            </div>
+            <select class="sel_time S_line1 W_fl" action-type="settime_hour" node-type="settime_hour">
+                                    <option value="00" selected="true">00</option>
+
+                            </select>
+            <span class="set_time_txt W_fl">时</span>
+            <select class="sel_time S_line1 W_fl" action-type="settime_min" node-type="settime_min">
+
+                                <option value="21" selected="true">21</option>
+
+                            </select>
+            <span class="set_time_txt W_fl">分</span>
+            <a title="取消发布定时微博" href="javascript:void(0)" action-type="close" class="W_ficon ficon_close S_ficon">X</a> <a href="http://weibo.com/5356516674/profile?profile_ftype=1&amp;timefeed=1#_0" node-type="timing_blog_manage" class="rt_txt W_fr">管理待发布微博</a>
+        </div>
+    </div>
+    <div class="func_area clearfix" node-type="widget" style="position: relative">
+         <div class="btn-group" style="width: 60px;height: 20px !important;">
+            <button style="padding: 2px 10px;border:0px;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              公开
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" style="padding: 2px 10px">
+              <li><a href="">公开</a></li>
+              <li><a href="">好友圈</a></li>
+              <li><a href="">仅自己可见</a></li>
+              <li><a href="">群可见</a></li>
+            </ul>
+         </div>
+         <a onclick="Sub(this);" id="analytic" username="{{ infomation.userinfo.name }}" style=" cursor: pointer;display: inline-block;margin-top: 3px;margin-left: 74px"
+                 href="javascript:void(0);" class="W_btn_a btn_30px W_btn_a_disable"
+            diss-data="module=stissue" node-type="submit" title="发布微博按钮">
+             发布</a>
+
+        <div class="kind">
+            <a id="face" class="S_txt1 face-icon" >
+                <em style="line-height: 1px;padding-top: 0px; font-size: 26px;color: #F56416" class="W_ficon ficon_image">
+                    ☺</em>表情</a>
+
+            <a onclick="Picture(this)" id="picture" class="S_txt1">
+                <em style="top: 4px;font-size: 16px; color: #F56416" class="glyphicon glyphicon-picture">
+                </em> 图片</a>
+
+
+
+
+
+
+            <a class="S_txt1" href="javascript:void(0);" action-type="video" action-data="type=502&amp;action=1&amp;log=video&amp;cate=1" title="视频" suda-uatrack="key=tblog_home_edit&amp;value=video_button">
+                <em style="color: #F56416;top: 4px;font-size: 16px" class="glyphicon glyphicon-facetime-video"></em> 视频</a>
+            <a class="S_txt1" href="javascript:void(0);" action-type="topic" action-data="type=504&amp;action=1&amp;log=topic&amp;cate=1" title="话题" suda-uatrack="key=tblog_home_edit&amp;value=topic_button">
+                <em style="color: #F56416;top: 4px;font-size: 20px" class="W_ficon ficon_swtopic">#</em> 话题</a>
+            <a class="S_txt1" href="http://weibo.com/ttarticle/p/editor" target="_blank" title="头条文章" suda-uatrack="key=tblog_headline_article&amp;value=headline_article_button">
+                <em style="font-size:16px;top: 2px;color: #F56416;" class="glyphicon glyphicon-flash"></em>头条文章</a>
+            <a href="javascript:void(0);" node-type="more" class="W_ficon ficon_more S_ficon" title="查看更多"></a>
+	                </div>
+    </div>
+</div>
+</div>
+<div class="picture hide" style="border-radius: 15px;z-index: 9999;position: absolute" >
+<div onclick="Close(this)" style="cursor: pointer;font-size: 50px;font-weight: 500;float: right">X</div>
+    <div style="width: 460px;height: auto;background-color:white " class="Picture_Home fileImg" id="fileImg">
+         <!--  文件上传        --->
+        <input onchange="UploadFile();" style="width: 200px;height: 50px" name="file" class="MyPic" type="file" id="files" multiple />
+        <output id="list"></output>
+        <input type="button" >
+    </div>
+</div>
+{% endif %}
+{% if is_login %}
+<div id="message"  class="" style="color: #EB7350; text-align: center;background-color: #FFF8BF;margin-bottom: 10px">您有<span></span>条未读消息</div>
+
+{% endif %}
+<!--中间内容-->
+<div id="weibo_list" class="WB_feed ">
+{% for item in infomation.weibo_detail_data.weibo_detail_item %}
+<div class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover">
+    <div class="WB_feed_detail clearfix">
+        <div class="WB_vipcover">
+            <a href="javascript:void(0)" ></a>
+        </div>
+        <div class="WB_screen W_fr">
+            <div style="margin: 0px 0px 0px -43px;" class="screen_box">
+                <a href="javascript:void(0);" action-type="fl_menu">
+                    <i style="font-size: 18px;color: #f7671d;" class="glyphicon glyphicon-plus"></i>
+                    <sapn style="color: #f7671d;font-size: 16px">关注</sapn>
+                </a>
+            </div>
+        </div>
+
+        <div class="WB_face W_fl">
+    <div class="face">
+        <a target="_blank" class="W_face_radius" title="猫扑">
+            <img width="50" height="50" src="http://tva1.sinaimg.cn/crop.0.0.179.179.50/62f87eb4gw1eic3hhy5jpj2050050mxb.jpg" class="W_face_radius">
+        </a>
+    </div>
+</div>
+
+        <div class="WB_detail">
+            <div class="WB_info">
+                <a target="_blank" class="W_f14 W_fb S_txt1" >{{ item.user__name }}</a>
+                <a target="_blank" >
+                    <i title="微博官方认证" class="W_icon icon_approve_co"></i>
+                </a>
+                <a title="微博会员" target="_blank" ><em class="W_icon icon_member4"></em>
+                </a>
+                <a target="_blank" >
+                    <i style="background-image: url('/statics/head_img/icon.png')" class="W_icon icon_airball"></i>
+                </a>
+            </div>
+            <div class="WB_from S_txt2">
+                <a target="_blank" class="S_txt2" >{{ item.date }}</a>
+                来自 <a class="S_txt2" target="_blank" >微博 weibo.com</a>
+            </div>
+            <div id="web_id" class="hide web_id">{{ item.id }}</div>
+            <div class="WWWW WB_text W_f14" node-type="feed_list_content">
+                {{ item.text }}
+            </div>
+             <!-- 引用文件时，必须对midia_info赋值 -->
+<!-- 微博心情，独立于标准的ul节点 -->
+        <div class="WB_media_wrap clearfix" node-type="feed_list_media_prev">
+    <div class="media_box">
+               <!--图片个数大于1，不渲染卡片-->
+                <!--TODO 只显示图片-->
+    <!--picture_count == 9-->
+    <ul style="width:342px;" class="WB_media_a WB_media_a_mn WB_media_a_m9 clearfix" >
+        {% for i in item.pictures_link_id %}
+            <li style="width: 110px;height: 110px" class="WB_pic li_1 S_bg1 S_line2 bigcursor unlog_pic"><img
+                    src="{{ i }}"
+                    alt="" style="width: 110px;height: 110px" class="">
+            </li>
+        {% endfor %}
+    </ul>
+    </div>
+</div>
+<div class="WB_expand_media_box " style="display: none;" node-type="feed_list_media_disp"></div>
+<!-- feed区 大数据tag -->
+</div><!-- /feed区 大数据tag -->
+</div>
+    <div class="WB_feed_handle">
+        <div class="WB_handle">
+            <ul class="WB_row_line WB_row_r4 clearfix S_line2">
+                <li>
+                    <a class="S_txt2">
+                        <span class="pos">
+                            <span class="line S_line1" >
+                                    <em class="glyphicon glyphicon-heart"></em>
+                                    <em>收藏</em>
+                                    <em>1234</em>
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="S_txt2">
+                        <span onclick="Forward(this);" weibo_id="{{ item.id }}" class="pos">
+                            <span class="line S_line1" >
+                                <span>
+                                    <em class=" glyphicon glyphicon-new-window"></em>
+                                    <em>转发</em>
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="S_txt2">
+                        <span onclick="Show_R(this);" head_img="/{{ infomation.userinfo.head_img }}" weibo_id="{{ item.id }}"  class="pos">
+                            <span class="line S_line1">
+                                <span><em class="glyphicon glyphicon-comment"></em>
+                                    <em>评论</em>
+                                    <em>1234</em>
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                    <span class="arrow" style="display: none;" >
+                        <span class="W_arrow_bor W_arrow_bor_t">
+                            <i class="S_line1"></i>
+                            <em class="S_bg1_br"></em>
+                        </span>
+                    </span>
+                </li>
+                <li>
+                    <a  class="S_txt2">
+                        <span class="pos">
+                            <span class="line S_line1">
+                                <span node-type="like_status" class="">
+                                    <em class="glyphicon glyphicon-thumbs-up"></em>
+                                    <em>赞</em>
+                                    <em>1234</em>
+                                </span>
+                            </span>
+                    </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div node-type="feed_list_repeat" class="WB_feed_repeat S_bg1" style="display:none;"></div>
+
+    <div class="repeat_area hide WB_feed_repeat S_bg1" style="width: 600px;height: auto;background-color: #F2F2F5;" >
+        <div class="WB_repeat S_line1 ">
+<!--  评论框    -->
+    <div class="WB_feed_publish clearfix">
+        <div class="WB_face W_f1">
+            <img src="/{{ infomation.userinfo.head_img }}" alt="">
+        </div>
+        <div class="WB_publish">
+            <div class="p_input">
+                <textarea class="repeat_text em1111 W_input " style="margin: 0px; padding: 5px 2px 0px 6px; border-style: solid; border-width: 1px; font-size: 12px; word-wrap: break-word; line-height: 18px; overflow: hidden; outline: none; height: 23px;"  name=""  cols="30" rows="10"></textarea>
+            </div>
+            <div class="p_opt clearfix">
+                <div class="btn W_fr">
+                    <span weibo_id="{{ item.id }}" comment_type="top" username="{{ infomation.userinfo.name }}" head_img="/{{ infomation.userinfo.head_img }}" onclick="Repeat(this);" class="W_btn_a " href="">评论</span>
+                </div>
+                <div class="opt clearfix">
+                    <span class="ico">
+                        <a class="face1" style="color:#F56416;font-size: 30px">☺</a>
+                        <a style="position: relative;font-size: 18px;color: #F56416" class="glyphicon glyphicon-picture" href=""></a>
+                    </span>
+                    <ul class="ipt">
+                        <li>
+                            <label class="W_label" for="">
+                                <input class="W_checkbox" type="checkbox">
+                                <span>同时转发到我的微博</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="W_label" for="">
+                                <input class="W_checkbox" type="checkbox">
+                                <span>同时评论给原文作者</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="repeat_list">
+        <div class="tab_feed_a clearfix S_line1">
+            <div class="W_fr">
+                <span class="S_txt2">共100条</span>
+            </div>
+            <div class="tab">
+                <ul class="clearfix">
+                    <li>
+                        <span class="line S_line1">
+                            <a href="" class="S_txt1 curr ">全部</a>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="line S_line1">
+                            <a href="" class="S_txt1">热门</a>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="line S_line1">
+                            <a href="" class="S_txt1">认证用户</a>
+                        </span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="list_box">
+            <div class="list_ul" id="comment_my_non_{{ item.id }}">
+                {% get_comment_handler "info_comment" %}
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+</div>
+
+
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="WB_main_r" fixed-box="true">
+<!--登录用户上面的用户信息 -->
+                                {% if is_login %}
+                                    <div id="v6_pl_rightmod_myinfo" id="x2" class="">
+                                        <div class="WB_cardwrap S_bg2">
+                                            <div class="W_person_info">
+                                                <div class="cover" id="skin_cover_s"
+                                                     style="background-image:url(http://img.t.sinajs.cn/t6/skin/skin055/images/profile_cover_s.jpg?version=15c0e60fc6524d12)">
+                                                    <div class="headpic"><a bpfilter="page_frame"
+                                                                            href="/personal/"
+                                                                            title="妈妈说名字越长用的人越少真麻烦"><img
+                                                            class="W_face_radius"
+                                                            src="/{{ infomation.userinfo.head_img }}"
+                                                            width="60" height="60" alt="{{ infomation.userinfo.name }}"></a></div>
+                                                </div>
+                                                <div class="WB_innerwrap">
+                                                    <div class="nameBox"><a bpfilter="page_frame"
+                                                                            href="/5356516674/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo"
+                                                                            class="name S_txt1" title="妈妈说名字越长用的人越少真麻烦">{{ infomation.userinfo.name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><a
+                                                            action-type="ignore_list" title="微博会员" target="_blank"
+                                                            href="http://vip.weibo.com/"><i
+                                                            class="W_icon icon_member_dis"></i></a><a target="_blank"
+                                                                                                      href="http://huodong.weibo.com/travel2016?ref=icon "
+                                                                                                      title="带着微博去旅行"><i
+                                                            class="W_icon icon_airball"></i></a><a action-type=""
+                                                                                                   suda-data="key=tblog_grade_float&amp;value=grade_icon_click"
+                                                                                                   target="_blank"
+                                                                                                   href="http://level.account.weibo.com/level/mylevel?from=front"><span
+                                                            node-type="levelBox" levelup="0" action-data="level=9"
+                                                            class="W_icon_level icon_level_c2"><span
+                                                            class="txt_out"><span class="txt_in"><span
+                                                            node-type="levelNum" title="微博等级9 升级有好礼">&nbsp;Lv.9&nbsp;</span></span></span></span></a>
+                                                    </div>
+                                                    <ul class="user_atten clearfix W_f18">
+                                                        <li class="S_line1"><a bpfilter="page_frame"
+                                                                               href="/5356516674/follow?rightmod=1&amp;wvr=6"
+                                                                               class="S_txt1"><strong
+                                                                node-type="follow">{{ infomation.followed_num }} 个&nbsp;&nbsp;</strong><span
+                                                                class="S_txt2">关注</span></a></li>
+                                                        <li class="S_line1"><a bpfilter="page_frame"
+                                                                               href="/5356516674/fans?rightmod=1&amp;wvr=6"
+                                                                               class="S_txt1"><strong
+                                                                node-type="fans">{{ infomation.my_fans_num }} 个&nbsp;&nbsp;</strong><span
+                                                                class="S_txt2">粉丝</span></a></li>
+                                                        <li class="S_line1"><a bpfilter="page_frame"
+                                                                               href="/5356516674/profile?rightmod=1&amp;wvr=6&amp;mod=personnumber"
+                                                                               class="S_txt1"><strong node-type="weibo">{{ infomation.webo_count }} 条&nbsp;&nbsp;</strong><span
+                                                                class="S_txt2">微博</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                    <div id="pl_unlogin_home_login">
+                                        <div style="visibility: hidden;"></div>
+                                        <div style="z-index: 10; transform: translateZ(0px); position: relative; width: 230px;">
+                                            {% if not  is_login %}
+
+                                            <div class="W_unlogin_v2" id="W_unlogin_v2" fixed-inbox="true" fixed-id="2">
+                                                <div class="login_box" id="pl_login_form">
+                                                    <div class="login_innerwrap">
+                                                        <div class="info_header">
+                                                            <div class="tab clearfix">
+                                                                <a href="javascript:void(0);" node-type="normal_tab"
+                                                                   action-type="switchTab" action-data="type=normal"
+                                                                   suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login"
+                                                                   class="cur W_fb">
+                                                                    <!-- <span class="W_icon_rec"><span class="W_icon_rec_txt">推荐</span><span class="W_arrow_bor W_arrow_bor_r"><i class="S_spetxt"></i></span></span>-->
+                                                                    帐号登录</a>
+                                                                <a href="javascript:void(0);" node-type="qrcode_tab"
+                                                                   action-type="switchTab" action-data="type=qrcode"
+                                                                   suda-uatrack="key=tblog_weibologin3&amp;value=qrcode_login">安全登录</a>
+                                                            </div>
+                                                            <!-- qrcode_target  qrcode_phone 点击时相互切换 -->
+                                                            <a href="javascript:void(0);" node-type="message_tab"
+                                                               action-type="switchTab" action-data="type=message"
+                                                               class="qrcode_target qrcode_phone"></a>
+                                                        </div>
+                    <!-- 登录框content -->
+
+                                                        <div class="login_content" node-type="qrcode_form"
+                                                             style="display:none">
+
+
+                                                            <img src="about:blank;" style="height: 150px; width: 150px;"
+                                                                 node-type="qrcode_src" height="150" width="150" alt="">
+
+                                                            <p class=" S_txt1">请打开微博客户端“扫一扫”</p>
+
+                                                            <div class="info_list info_list1">
+                                                                <span class="S_txt2">还没有微博？</span><a target="_blank"
+                                                                                                     href="#">立即注册!</a>
+                                                            </div>
+
+                                                            <div class="opacity_bg" node-type="scan_mask"
+                                                                 style="display:none"></div>
+                                                            <div class="result res_error" node-type="scan_error"
+                                                                 style="display:none">
+                                                                <span class="W_icon icon_rederrorB"></span>
+                                                                <div class="res_info">出错了，<a href="javascript:void(0);"
+                                                                                             action-type="re_scan">重新扫描</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="result res_succ" node-type="scan_success"
+                                                                 style="display:none">
+                                                                <span class="W_icon icon_succB"></span>
+                                                                <div class="res_info">扫码成功</div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <!-- /result end -->
+
+
+                                                        <div class="W_login_form" node-type="normal_form">
+                                                            <!--<div class="info_list pre_info clearfix" node-type="prename_box" style="display:none"></div>-->
+                                                            <div class="info_list username" node-type="username_box">
+                                                                <div class="input_wrap">
+                                                                    <input id="username" type="text"
+                                                                           placeholder="请输入用户名" class="W_input"
+                                                                           maxlength="128" autocomplete="off"
+                                                                           action-data="text=邮箱/会员帐号/手机号"
+                                                                           action-type="text_copy" name="username"
+                                                                           node-type="username" tabindex="1">
+                                                                </div>
+                                                            </div>
+                                                            <div class="info_list password" node-type="password_box">
+                                                                <div class="input_wrap">
+                                                                    <input id="password" type="password" class="W_input" placeholder="请输入人密码"
+                                                                           maxlength="128" autocomplete="off"
+                                                                           action-data="text=密码" action-type="text_copy"
+                                                                           name="password" node-type="password"
+                                                                           tabindex="1">
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <div class="info_list login_btn" onclick="Post_user(this);">
+                                                                <a href="javascript:void(0)" class="W_btn_a btn_32px"
+                                                                   action-type="btn_submit" node-type="submitBtn"
+                                                                   suda-data="key=tblog_weibologin3&amp;value=click_sign"
+                                                                   tabindex="6"><span node-type="submitStates">登录</span></a>
+                                                            </div>
+                                                            <div class="info_list register">
+                                                                <span class="S_txt2">还没有微博？</span><a target="_blank"
+                                                                                                     href="#">立即注册!</a>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                       </div>
+
+
+                                                </div>
+
+                                            </div>
+                                            {% endif %}
+                                            <div style="height:1px;margin-top:-1px;visibility:hidden;"></div>
+                                        </div>
+                                        <div class="bg" node-type="qr_help"
+                                             style="position: absolute; top: 2px; left: -220px; width: 264px; height: 372px; z-index: 999; display: none; background-image: url(&quot;#"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="W_gotop S_ficon_bg" id="base_scrollToTop" href="javascript:void(0);"
+                       style="visibility: hidden; transform: translateZ(0px); position: fixed; bottom: 40px; top: auto;"><em
+                            class="W_ficon ficon_backtop S_bg2_c">Ú</em></a>
+                </div>
+            </div>
+        </div>
+        <div id="v6_pl_base"></div>
+
+
+    </div>
+    <div node-type="layer" class="layer_menu_list" style="display:none;">
+        <ul>
+            <li class="note">请选择邮箱类型</li>
+        </ul>
+        <ul node-type="panel"></ul>
+    </div>
+
+{% endblock %}
+
+
+{% block js1 %}
+ <script type="text/javascript">
+        try {
+            document.execCommand("BackgroundImageCache", false, true);
+        } catch (e) {
+        }
+    </script>
+
+    <style>#js_style_css_module_global_WB_outframe {
+        height: 42px;
+    }</style>
+    <style></style>
+    <div style="position: absolute; top: -9999px;">
+        <div id="js_style_css_module_global_WB_outframe"></div>
+    </div>
+    <style></style>
+    <script charset="gb2312" id="ssoLoginScript" type="text/javascript"
+            src="/statics/index_profile_js_css/prelogin.php"></script>
+
+
+
+    <script src="/statics/index_profile_js_css/jquery-1.8.2.min.js"></script>
+    <script src="/statics/search/bootstrap.min.js"></script>
+    <script src="/statics/search/face/jquery-1.8.0.min.js"></script>
+    <script src="/statics/search/face/jquery.sinaEmotion.js"></script>
+
+    <script>
+        $(function () {
+            Post_user();
+            check_is_login();
+            out();
+        });
+
+        $('#face').SinaEmotion($('.emotion'));
+        $('.face1').SinaEmotion($('.em1111'));
+
+		// 测试本地解析
+
+         $("#textarea").focusin(function () {
+            $(".key").addClass("hide");
+            $(".title2").removeClass("hide")
+        });
+        $("#textarea").focusout(function() {
+            $(".key").removeClass("hide");
+            $(".title2").addClass("hide")
+        });
+
+        //文本矿中的输入内容字数进行相应的变化
+        function font_siz() {
+            var num = $("#textarea").val().length;
+            if(num<140){
+                 $(".title2").html('还可以输入'+ '<span></span>' + '字');
+                var all = $(".title2 span").text();
+                $(".title2 span").text(140-num);
+            }else{
+                 $(".title2").html('已超出'+ '<span>0</span>' + '字');
+                var all = $(".title2 span").text();
+                $(".title2 span").text(Math.abs(140-num));
+            }
+
+        }
+
+        function get_comment(weibo_id,head_img) {
+
+            var comment_str1 = '<div class=\"list_li S_line1 clearfix\" to_weibo_id=\"'
+            var to_weibo_id = 45
+            var comment_str1_4 = '\" comment_id=\"'
+            var comment_id = 33
+            var conment_str1_5 = '\">'+
+                    '<div class=\"WB_face W_fl\">'+
+                        '<a href=\"\">'+
+                            "<img style=\"width: 30px;height: 30px\" src=\""+head_img+"\" alt=\"\">"+
+                        "</a>"+
+                    "</div>"+
+                    "<div class=\"list_con\">"+
+                        "<div class=\"WB_text\">"+
+                            "<a class=\"WB_text_username\" href=\"\">"
+            var comment_user = "大佐"
+            var comment_str2 =
+                            "</a>"+
+                            "<a href=\"http://huodong.weibo.com/travel2016?ref=icon \">"+
+                            "<i class=\"W_icon icon_airball\">"+
+                            ":"+
+                            "</i>"+
+                            "</a>"
+            var comment_content = "：笑的肚子疼"
+
+            var comment_str4 ="<img src=\"\" alt=\"\">"+
+                        "</div>"+
+                        "<div class=\"WB_func clearfix\" style=\"display: block\">"+
+                            "<div class=\"WB_handler\">"+
+                                "<ul class=\"ul_ul\" >"+
+                                    "<li>"+
+                                        "<span class=\"line S_line1\">"+
+                                        "<a class=\"S_txt1\" href=\"\">"+
+                                        "<span  class=\"line S_line1\">"+
+                                            "<em class=\"glyphicon glyphicon-thumbs-up\">"+
+                                            "</em>"+
+                                            "<em>"
+            var thumb_up = 10
+            var  comment_str5 = "</em>"+
+                                        "</span>"+
+                                        "</a>"+
+                                        "</span>"+
+                                    "</li>"+
+                                    "<li>"+
+                                        "<span class=\"line S_line1\">"+
+                                        "<span onclick=\"Show_Sun_Repeat(this)\" class=\"S_txt1\">"+
+                                        "回复"+
+                                        "</span>"+
+                                        "</span>"+
+                                    "</li>"+
+
+                                    "<li class=\"hide\">"+
+                                    "举报"+
+                                    "</li>"+
+
+
+                                "</ul>"+
+                            "</div>"+
+                            "<div>"
+            var comment_time = "今天 14:30"
+            var comment_str6 = "</div>"+
+                        "</div>"+
+                         "<div class=\"hide WB_repeat_in S_bg2\">"+
+                         "<div class=\"WB_feed_publish clearfix\">"+
+                         "<div class=\"WB_publish\"> "+
+                         "<div class=\"p_input\">"  +
+                         "<textarea class=\"W_input\" range=\"8&amp;0\" style=\"margin: 0px; padding: 5px 2px 0px 6px; border-style: solid; border-width: 1px; font-size: 12px; word-wrap: break-word; line-height: 18px; overflow: hidden; outline: none; height: 23px;\"></textarea>" +
+                         "</div>"+
+                         "<div class=\"p_opt clearfix\">"+
+                         "<div head_img=\"/{{ infomation.userinfo.head_img }}\" username=\"{{ infomation.userinfo.name }}\" onclick=\"Sun_Repeat(this,"
+            var comment_id
+            var fu_dou = ","
+            var to_weibo_id
+            var comment_str7 = ")\" class=\"btn W_fr\">"+
+                         "<a class=\"W_btn_a W_btn_a_disable\">"+
+                         "评论"+
+                         "</a>"+
+                         "</div>"+
+                         "<div node-type=\"widget\" class=\"opt clearfix\">" +
+                         "<span class=\"ico\">"+
+                         "<a>"+
+                         "<i style=\"font-size:26px\">"+
+                         "☺"+
+                         "</i>"+
+                         "</a>"+
+                         "</span>"+
+                         "<ul class=\"ipt\">"+
+                         "<li>"+
+                         "<lable class=\"W_label\">"+
+                         "<input type=\"checkbox\" class=\"W_checkbox\">"+
+                         "<span>" +
+                         "同时转发到我的微博"+
+                         "</span>"+
+                         "</lable>"+
+                         "</li>"+
+                         "</ul>"+
+                         "</div>"+
+                         "</div>"+
+                         "</div>"+
+                         "</div>"+
+                         "</div>"+
+                         "</div>"+
+                    "</div>"+
+                "</div>"
+
+            $.ajax({
+                url:"/get_all_comment/",
+                data:{"weibo_id":weibo_id},
+                type:"POST",
+                dataType:"JSON",
+                success:function (callback) {
+                    console.log(callback)
+                    if (callback.status){
+                        $.each(callback.data,function (k,v) {
+                            if (k == "data"){
+                                $.each(v,function (key,item) {
+                                    $.each(item,function (ziduan,val_mes_dic) {
+{#                                        console.log(ziduan,val_mes_dic)#}
+                                        $.each(val_mes_dic,function (name,val) {
+{#                                            console.log(name,val)#}
+                                            if (name == "user__name"){
+                                                comment_user = val
+                                            }else if(name == "comment"){
+                                                comment_content = val
+                                            }else if(name == "to_weibo"){
+                                                to_weibo_id = val
+                                            }else if(name == "id"){
+                                                comment_id = val
+                                            }else  if(name == "date"){
+                                                comment_time = val
+                                            }else if(name == "comment_type"){
+                                                if (val == 1){
+                                                    thumb_up == val
+                                                }
+                                            }
+
+                                        })
+                                        var tag = $("#comment_my_non_"+weibo_id)
+                                        var comment_div = comment_str1+weibo_id+comment_str1_4+comment_id+conment_str1_5+comment_user+comment_str2+comment_content+comment_str4+thumb_up+comment_str5+comment_time+comment_str6+comment_id+fu_dou+to_weibo_id+comment_str7
+                                        tag.append(comment_div)
+                                            console.log(comment_id,to_weibo_id,fu_dou)
+                                        
+                                    })
+                                })
+                            }
+                        })
+                    }
+
+{#                    var new_ele = document.createElement('div')#}
+{#                    new_ele.className = "list_box"#}
+{#                    var tag = document.createElement("div")#}
+{#                    tag.className = "list_ul"#}
+
+
+{#                    new_ele.appendChild(tag)#}
+
+                }
+            })
+        }
+
+        //评论区   点击隐藏   再点击显示
+        function Show_R(ths) {
+            var tag = $(ths).parentsUntil(".WB_cardwrap").siblings('.repeat_area');
+
+            if(tag.hasClass('hide')){
+                tag.removeClass('hide');
+                var weibo_id = $(ths).attr("weibo_id");
+                var head_img = $(ths).attr("head_img");
+                console.log(head_img);
+                get_comment(weibo_id,head_img);
+            }else {
+                tag.addClass('hide');
+                var weibo_id = $(ths).attr("weibo_id");
+                $("#comment_my_non_"+weibo_id).empty()
+            }
+        }
+
+        function Show_Sun_Repeat(ths) {
+            var m = $(ths).parentsUntil('.list_con').siblings('.WB_repeat_in ');
+            console.log(m)
+            var repeat_who = $(ths).parentsUntil('.list_con').siblings('.WB_text').children('.WB_text_username').text()
+            var at_sb = $(ths).parentsUntil('.list_con').siblings('.WB_repeat_in ').children('.WB_feed_publish ').children('.WB_publish').children('.p_input').children('.W_input')
+            at_sb.text('回复@'+repeat_who+':')
+            if(m.hasClass('hide')){
+                m.removeClass('hide');
+            }else {
+                m.addClass('hide')
+            }
+            
+        }
+
+        //二级评论
+        function Sun_Repeat(ths,comment_id,to_weibo_id) {
+            var conn = $(ths).parentsUntil('.WB_publish').siblings('.p_input').children('.W_input').val()
+            console.log(conn,comment_id,to_weibo_id,111123123)
+            var head_img = $(ths).attr("head_img")
+            var user_name = $(ths).attr("username")
+            var myDate = new Date();
+            var mytime=myDate.toLocaleTimeString();
+            $.ajax({
+                url: "/pub_comment/",
+                type: "POST",
+                dataType: "JSON",
+                data: {'te_comment': conn, "weibo_id": to_weibo_id,"comment_id":comment_id},
+                success: function (callback) {
+
+                    console.log(typeof(callback['data']));
+
+                    var rep = [
+                        '<div class="list_li S_line1 clearfix"><div class="WB_face W_fl"><a href="">',
+                        '<img style="width: 30px;height: 30px" src="',
+                        head_img,
+                        '"alt=""></a></div><div class="list_con"><div class="WB_text"><a href="">',
+                        user_name,
+                        '</a><a href=" "><i class="W_icon icon_airball">:</i></a>',
+                        conn,
+                        '<img src="" alt=""></div><div class="WB_func clearfix" style="display: block"><div class="WB_handler"><ul class="ul_ul"><li><span class="line S_line1"><a class="S_txt1" href=""><span style="padding-right:3px" class="glyphicon glyphicon-thumbs-up"><em>',
+                        10,
+                        '</em></span></a></span></li><li><span class="line S_line1"><a class="S_txt1" href="">回复</a></span></li><li class="hide">举报</li></ul></div><div>',
+                        mytime,
+                        '</div></div></div></div>'
+                    ].join('');
+                    $('.list_ul').prepend(rep)
+                }
+
+            })
+
+        }
+
+
+
+        //picture上传
+        function Close(ths) {
+            $('.picture').addClass('hide')
+        }
+
+        function handleFileSelect(evt) {
+            var files = evt.target.files;
+
+            // Loop through the FileList and render image files as thumbnails.
+            for (var i = 0, f; f = files[i]; i++) {
+
+              // Only process image files.
+              if (!f.type.match('image.*')) {
+                continue;
+              }
+
+              var reader = new FileReader();
+
+              // Closure to capture the file information.
+              reader.onload = (function(theFile) {
+                return function(e) {
+                  // Render thumbnail.
+                  var span = document.createElement('span');
+                  span.innerHTML =
+                  [
+                    '<img style="height: 75px; border: 1px solid #000; margin: 5px" src="',
+                    e.target.result,
+                    '" title="', escape(theFile.name),
+                    '"/>'
+                  ].join('');
+
+                  document.getElementById('list').insertBefore(span, null);
+                };
+              })(f);
+
+              // Read in the image file as a data URL.
+              reader.readAsDataURL(f);
+            }
+          }
+
+        document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+        $('#face').click(function () {
+{#            $('#face').siblings.addClass('hide')#}
+            $('.picture').addClass('hide')
+        });
+        function Picture(ths) {
+            $('.picture').removeClass('hide');
+            $('.picture').siblings.addClass('hide')
+        }
+
+        form = new FormData();
+        function UploadFile(){
+{#            console.log($('.MyPic'))#}
+            var fileObj = $('.MyPic')[0].files;
+            $.each(fileObj,function (k,v) {
+                form.append('fff',v);
+            });
+            console.log(fileObj,form);
+
+
+        }
+{#        pub_list = []#}
+        function Sub(ths) {
+            $('.picture').addClass('hide');
+            $('#News').removeClass('hide');
+            var content = $('#textarea').val();
+            console.log(content);
+            var data_all_msg = {};
+            form.append("text",content);
+            form.append("wb_type",0);
+            console.log(form,'----------+++++++++++++++++');
+            $.ajax({
+                type:'POST',
+                url:'/create_weibo/',
+                dataType:"JSON",
+                data:form,
+                processData: false,  // tell jQuery not to process the data
+                contentType: false,  // tell jQuery not to set contentType
+                success:function (data) {
+                    //data为对象
+                    //data['data']是字符串
+                    var con = JSON.parse(data['data'])['text']
+                    console.log(data,'111111111888888888')
+                    var pic_list = JSON.parse(JSON.parse(data['data'])['pictures_link_id']);
+                    console.log(data['data'])
+                    var leng = pic_list.length;
+                    var myDate = new Date();
+                    var mytime=myDate.toLocaleTimeString();
+                    var username = $(ths).attr("username")
+                    ll = ''
+                    for(var i= 0;i<leng;i++){
+                        ll = ll +'<li style="width: 110px;height: 110px" class="WB_pic li_1 S_bg1 S_line2 bigcursor unlog_pic"> <img src="' +pic_list[i]+'' + '"style="width: 110px;height: 110px" class=""></li>'
+                      }
+                    var zane = AnalyticEmotion(con);
+                    console.log(zane, 11111111);
+                    console.log(typeof zane);
+                    var new_li2 = [
+                        '<div class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover"><div class="WB_feed_detail clearfix"><div class="WB_vipcover"><a href="javascript:void(0)" ></a></div><div class="WB_screen W_fr"><div style="margin: 0px 0px 0px -43px;" class="screen_box"><a href="javascript:void(0);" action-type="fl_menu"><i style="font-size: 18px;color: #f7671d;" class="glyphicon glyphicon-plus"></i><sapn style="color: #f7671d;font-size: 16px">关注</sapn></a></div></div><div class="WB_face W_fl"><div class="face"><a target="_blank" class="W_face_radius" title="猫扑"><img width="50" height="50" src="http://tva1.sinaimg.cn/crop.0.0.179.179.50/62f87eb4gw1eic3hhy5jpj2050050mxb.jpg" class="W_face_radius"></a></div></div><div class="WB_detail"><div class="WB_info"><a target="_blank" class="W_f14 W_fb S_txt1" >',
+                        username,
+                        '</a><a target="_blank" ><i title="微博官方认证" class="W_icon icon_approve_co"></i></a><a title="微博会员" target="_blank" ><em class="W_icon icon_member4"></em></a><a target="_blank" ><i style="background-image: url("/statics/head_img/icon.png")" class="W_icon icon_airball"></i></a></div><div class="WB_from S_txt2"> <a target="_blank" class="S_txt2" >',
+                        mytime,
+                        '</a>来自 <a class="S_txt2" target="_blank" >微博 weibo.com</a></div><div id="web_id" class="hide web_id">{{ item.id }}</div><div class="WWWW WB_text W_f14" node-type="feed_list_content">',
+                        zane,
+                        '</div><div class="WB_media_wrap clearfix" node-type="feed_list_media_prev"><div class="media_box"><ul style="width:342px;" class="WB_media_a WB_media_a_mn WB_media_a_m9 clearfix" >',
+                        ll,
+                        '</ul></div></div><div class="WB_expand_media_box " style="display: none;"></div></div></div><div class="WB_feed_handle"><div class="WB_handle"><ul class="WB_row_line WB_row_r4 clearfix S_line2"><li><a class="S_txt2"><span class="pos"><span class="line S_line1" ><em class="glyphicon glyphicon-heart"></em><em>收藏</em><em>',
+                        121,
+                        '</em></span></span></a></li><li><a class="S_txt2"><span class="pos"><span class="line S_line1" ><span><em class=" glyphicon glyphicon-new-window"></em><em>转发</em><em>',
+                        123,
+                        '</em></span></span></span></a></li><li><a class="S_txt2"><span class="pos"><span class="line S_line1"><span><em class="glyphicon glyphicon-comment"></em><em>评论</em><em>',
+                        125,
+                        '</em></span></span></span></a><span class="arrow" style="display: none;" ><span class="W_arrow_bor W_arrow_bor_t"><i class="S_line1"></i><em class="S_bg1_br"></em></span></span></li><li><a  class="S_txt2"><span class="pos"><span class="line S_line1"><span node-type="like_status" class=""><em class="glyphicon glyphicon-thumbs-up"></em><em>赞</em><em>',
+                        127,
+                        '</em></span></span></span></a></li></ul></div></div><div node-type="feed_list_repeat" class="WB_feed_repeat S_bg1" style="display:none;"></div></div>',
+                    ].join('');
+                    $('#weibo_list').prepend(new_li2);
+
+                    console.log(data,'------------------111111111111111111')
+
+                }
+            });
+
+            form = new FormData();
+        }
+        //评论
+        function Repeat(ths) {
+            var te_comment = $(ths).parent().parent().siblings(":eq(0)").children().val()
+            var weibo_id = $(ths).attr("weibo_id")
+            var comment_type = $(ths).attr("comment_type")
+            var head_img = $(ths).attr("head_img")
+            console.log(te_comment,weibo_id)
+            $.ajax({
+                url:"/pub_comment/",
+                type:"POST",
+                dataType:"JSON",
+                data:{'te_comment':te_comment,"weibo_id":weibo_id,"comment_type":comment_type},
+                success:function (callback) {
+
+                    console.log(typeof(callback['data']));
+                    user_name = $(ths).attr("username")
+                    var myDate = new Date();
+                    var mytime=myDate.toLocaleTimeString();
+                    comment = te_comment;
+                    console.log(comment)
+
+                     var rep = [
+                    '<div class="list_li S_line1 clearfix"><div class="WB_face W_fl"><a href="">',
+                    '<img style="width: 30px;height: 30px" src="',
+                    head_img,
+                    '"alt=""></a></div><div class="list_con"><div class="WB_text"><a href="">',
+                         user_name,
+                    '</a><a href=" "><i class="W_icon icon_airball">:</i></a>',
+                    comment,
+                    '<img src="" alt=""></div><div class="WB_func clearfix" style="display: block"><div class="WB_handler"><ul class="ul_ul"><li><span class="line S_line1"><a class="S_txt1" href=""><span style="padding-right:3px" class="glyphicon glyphicon-thumbs-up"><em>',
+                    10,
+                    '</em></span></a></span></li><li><span class="line S_line1"><a class="S_txt1" href="">回复</a></span></li><li class="hide">举报</li></ul></div><div>',
+                    mytime,
+                    '</div></div></div></div>'
+                    ].join('');
+                    $('.list_ul').prepend(rep)
+                    console.log(callback,123123)
+                }
+
+            })
+        }
+
+        function Rep() {
+            var conn = $('.repeat_text').val();//获取评论框中的内容
+            $.ajax({
+                type:"POST",
+                url:"",
+                dataType:'JSON',
+                data: {'data':conn},
+                processData: false,  // tell jQuery not to process the data
+                contentType: false,  // tell jQuery not to set contentType
+                success:function (data) {
+                    var rep = [
+                    '<div class="list_li S_line1 clearfix"><div class="WB_face W_fl"><a href="">',
+                    '<img style="width: 30px;height: 30px" src="',
+                    '/statics/image/tu.png',
+                    '"alt=""></a></div><div class="list_con"><div class="WB_text"><a href="">',
+                    conn,
+                    '</a><a href="http://huodong.weibo.com/travel2016?ref=icon "><i class="W_icon icon_airball">☺</i></a>',
+                    conn,
+                    '<img src="" alt="我是表情"></div><div class="WB_func clearfix" style="display: block"><div class="WB_handler"><ul class="ul_ul"><li><span class="line S_line1"><a class="S_txt1" href=""><span class="line S_line1"><em class="glyphicon glyphicon-thumbs-up">',
+                    10,
+                    '</em></span></a></span></li><li><span class="line S_line1"><a class="S_txt1" href="">回复</a></span></li><li class="hide">举报</li></ul></div><div>',
+                    conn,
+                    '</div></div></div></div>'
+                    ].join('');
+                    $('.list_ul').prepend(rep)
+                }
+            })
+
+        }
+        //转发 -------------------------------------------------
+
+
+        function Forward(ths) {
+            var n = $(ths).parents('.WB_cardwrap');
+            var web_id = $(ths).attr("weibo_id");
+            var forward_web = n.clone();
+            var co = $(forward_web).find('.WWWW').text()
+            console.log(co,'+++++++++++++++++++')
+            console.log(forward_web,'---------------------');
+            $('#weibo_list').prepend(forward_web)
+{#            var co = $(forward_web).find('#textarea').text();#}
+{#            $.ajax({#}
+{#                url:"",#}
+{#                type:"POST",#}
+{#                dataType:"JSON",#}
+{#                data:{'data':forward_web,"id":web_id,'wb_type':1},#}
+{#                success:function (data) {#}
+{#                    var con = JSON.parse(data['data'])['text']#}
+{#                    console.log(data,'1111111111111111111888888888888888')#}
+{#                    var pic_list = JSON.parse(JSON.parse(data['data'])['pictures_link_id']);#}
+{##}
+{#                    var leng = pic_list.length;#}
+{#                    var myDate = new Date();#}
+{#                    var mytime=myDate.toLocaleTimeString();#}
+{#                    var username = $(ths).attr("username")#}
+{#                    ll = ''#}
+{#                    for(var i= 0;i<leng;i++){#}
+{#                        ll = ll +'<li style="width: 110px;height: 110px" class="WB_pic li_1 S_bg1 S_line2 bigcursor unlog_pic"> <img src="' +pic_list[i]+'' + '"style="width: 110px;height: 110px" class=""></li>'#}
+{#                      }#}
+{#                    var zane = AnalyticEmotion(con);#}
+{#                    console.log(zane, 11111111);#}
+{#                    console.log(typeof zane);#}
+{#                    var new_li2 = [#}
+{#                        '<div class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover"><div class="WB_feed_detail clearfix"><div class="WB_vipcover"><a href="javascript:void(0)" ></a></div><div class="WB_screen W_fr"><div style="margin: 0px 0px 0px -43px;" class="screen_box"><a href="javascript:void(0);" action-type="fl_menu"><i style="font-size: 18px;color: #f7671d;" class="glyphicon glyphicon-plus"></i><sapn style="color: #f7671d;font-size: 16px">关注</sapn></a></div></div><div class="WB_face W_fl"><div class="face"><a target="_blank" class="W_face_radius" title="猫扑"><img width="50" height="50" src="http://tva1.sinaimg.cn/crop.0.0.179.179.50/62f87eb4gw1eic3hhy5jpj2050050mxb.jpg" class="W_face_radius"></a></div></div><div class="WB_detail"><div class="WB_info"><a target="_blank" class="W_f14 W_fb S_txt1" >',#}
+{#                        username,#}
+{#                        '</a><a target="_blank" ><i title="微博官方认证" class="W_icon icon_approve_co"></i></a><a title="微博会员" target="_blank" ><em class="W_icon icon_member4"></em></a><a target="_blank" ><i style="background-image: url("/statics/head_img/icon.png")" class="W_icon icon_airball"></i></a></div><div class="WB_from S_txt2"> <a target="_blank" class="S_txt2" >',#}
+{#                        mytime,#}
+{#                        '</a>来自 <a class="S_txt2" target="_blank" >微博 weibo.com</a></div><div id="web_id" class="hide web_id">{{ item.id }}</div><div class="WWWW WB_text W_f14" node-type="feed_list_content">',#}
+{#                        zane,#}
+{#                        '</div><div class="WB_media_wrap clearfix" node-type="feed_list_media_prev"><div class="media_box"><ul style="width:342px;" class="WB_media_a WB_media_a_mn WB_media_a_m9 clearfix" >',#}
+{#                        ll,#}
+{#                        '</ul></div></div><div class="WB_expand_media_box " style="display: none;"></div></div></div><div class="WB_feed_handle"><div class="WB_handle"><ul class="WB_row_line WB_row_r4 clearfix S_line2"><li><a class="S_txt2"><span class="pos"><span class="line S_line1" ><em class="glyphicon glyphicon-heart"></em><em>收藏</em><em>',#}
+{#                        121,#}
+{#                        '</em></span></span></a></li><li><a class="S_txt2"><span class="pos"><span class="line S_line1" ><span><em class=" glyphicon glyphicon-new-window"></em><em>转发</em><em>',#}
+{#                        123,#}
+{#                        '</em></span></span></span></a></li><li><a class="S_txt2"><span class="pos"><span class="line S_line1"><span><em class="glyphicon glyphicon-comment"></em><em>评论</em><em>',#}
+{#                        125,#}
+{#                        '</em></span></span></span></a><span class="arrow" style="display: none;" ><span class="W_arrow_bor W_arrow_bor_t"><i class="S_line1"></i><em class="S_bg1_br"></em></span></span></li><li><a  class="S_txt2"><span class="pos"><span class="line S_line1"><span node-type="like_status" class=""><em class="glyphicon glyphicon-thumbs-up"></em><em>赞</em><em>',#}
+{#                        127,#}
+{#                        '</em></span></span></span></a></li></ul></div></div><div node-type="feed_list_repeat" class="WB_feed_repeat S_bg1" style="display:none;"></div></div>',#}
+{#                    ].join('');#}
+{#                    $('#weibo_list').prepend(new_li2);#}
+{##}
+{#                    console.log(data)#}
+{#                }#}
+{#            })#}
+        }
+        
+        
+
+        window.onload=function () {
+            $('.WWWW').each(function () {
+                var all_content = $(this).text();
+                var result = AnalyticEmotion(all_content);
+                $(this).html(result)
+            });
+        };
+
+        //定时去队列中取消息
+{#        var new_message = setInterval(new_web, 3000);#}
+{#        function new_web() {#}
+{#            $.ajax({#}
+{#                url:"/get_num_weibo/",#}
+{#                type:"POST",#}
+{#                dataType:"JSON",#}
+{#                success:function (data) {#}
+{#                    console.log(data)#}
+{#                    if (data.status){#}
+{#                        $('#message').text("您有" + data[new_weibo_count] + "条未读内容, 点击查看").removeClass('hide')#}
+{#                    }else {#}
+{##}
+{#                    }#}
+{#                }#}
+{#            })#}
+{#        }#}
+
+
+
+
+        function Post_user(ths) {
+            arg1 = $("#username").val();
+            arg2 = $("#password").val();
+            console.log(arg1,arg2);
+            userinfo = {"username":arg1,"password":arg2};
+            $.ajax({
+                url:"/weibo_login/",
+                type:"POST",
+                dataType:"JSON",
+                data:userinfo,
+                success:function (data) {
+
+                    console.log(data);
+                    if (data.status){
+                        location.href="/index";
+{#                        $("#v6_pl_content_publishertop").removeClass("hide")#}
+{#                        $("#v6_pl_rightmod_myinfo").removeClass("hide")#}
+{#                        $("#W_unlogin_v2").addClass("hide")#}
+                    }else {
+
+                    }
+
+
+                }
+
+            })
+
+        }
+
+
+    //end doc ready
+
+    </script>
+
+{% endblock %}
